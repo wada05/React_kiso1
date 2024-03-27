@@ -1,11 +1,13 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, useRef} from "react"
 import {useParams} from "react-router-dom"
 
 export function ThreadContents() {
   
-  const [threadContent, setContent] = useState({})
+  const [data, setContent] = useState({})
+  const [comment, setComment] = useState("")
   const { threadId } = useParams()
-  
+  const ref = useRef()
+
   useEffect(() => {
     fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`)
      .then(res => res.json())
@@ -14,27 +16,38 @@ export function ThreadContents() {
     })
   }, [])
 
-  console.log(threadContent)
+  const handleRef = async() => {
+    const res = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comment}),
+      })
+      const result = await res.json()
+    console.log(result)
+    }
 
-    if (!threadContent) {
+  console.log(data)
+
+    if (!data.posts) {
       return <></>;
     }
 
-  // const ContentList = threadContent.map((threadContent) => {
-  //   return(
-  //     <ul>
-  //       <li>{threadContent.posts} </li>
-  //     </ul>
-  //   )
-  // })
-
     return (
       <>
+        <h3>コメント</h3>
+        <p>
+          <input type="text" className="NewInput" value={comment} ref={ref} onChange={e => setComment(e.target.value)} />
+          <button className="NewButton" onClick={handleRef}>投稿</button>
+        </p>
         <h3>スレッド</h3> 
-        {/* {ContentList} */}
+        <ul>
+        {data.posts.map((post) => {
+        <li key={post.id}> {post} </li> })}
+        </ul>
       </>
-    );
+    )
   }
   
-  export default ThreadContents;
-  
+  export default ThreadContents;  

@@ -15,20 +15,17 @@ import { Link } from "react-router-dom"
     }, [])
 
 
-    if (!threads) {
+    if (!thread) {
         return <></>;
       }
 
-     const ThreadLists = thread.posts.map(posts, index) => {
+     const ThreadLists = thread.map((thread, index) => {
        return ( 
       <Link to ={`/thread/${index}`}>
        <li key={thread.id}>
           {thread.title}</li>     
       </Link>   
-      )
-
-       
-       
+      )     
      })
 
    return(
