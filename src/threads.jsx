@@ -21,10 +21,9 @@ import { Link } from "react-router-dom"
 
      const ThreadLists = thread.map((thread, index) => {
        return ( 
-      <Link to ={`/thread/${index}`}>
        <li key={thread.id}>
-          {thread.title}</li>     
-      </Link>   
+          <Link to ={`/thread/${index}`}>{thread.title}</Link></li>     
+        
       )     
      })
 
