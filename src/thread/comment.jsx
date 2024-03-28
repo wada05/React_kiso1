@@ -9,15 +9,20 @@ export function ThreadComment() {
 
   
   const handleRef = async() => {
+    try{
     const res = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({posts}),
+      body: JSON.stringify({post: posts}),
       })
+      
       const result = await res.json()
-      console.log(result)
+      console.log("投稿しました:", result)
+    } catch(error) {
+        console.error("投稿できません:", error)
+    }
       setComment("")
     }
 
