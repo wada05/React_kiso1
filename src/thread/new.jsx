@@ -1,12 +1,11 @@
-import {useRef, useState} from "react"
+import {useState} from "react"
 
 export function NewThread() {
    
     const [title, setTitle] = useState("")
 
-    const ref = useRef()
 
-    const handleRef = async() => {
+    const handleClick = async() => {
       const res = await fetch("https://railway.bulletinboard.techtrain.dev/threads?offset=0", {
         method: "POST",
         headers: {
@@ -25,8 +24,8 @@ export function NewThread() {
       <div className="div">
         <h3 className="NewTitle">スレッド新規作成</h3>
         <p>
-          <input type="text" className="NewInput" value={title} ref={ref} onChange={e => setTitle(e.target.value)} />
-          <button className="NewButton" onClick={handleRef}>作成</button>
+          <input type="text" className="NewInput" value={title} onChange={e => setTitle(e.target.value)} />
+          <button className="NewButton" onClick={handleClick}>作成</button>
         </p>
       </div>
     )

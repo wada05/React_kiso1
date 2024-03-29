@@ -2,7 +2,7 @@ import { useEffect, useState} from "react"
 import { Link } from "react-router-dom"
 
  export const FetchThreads =() => { 
-    const [thread, setThread] = useState([])
+    const [threads, setThreads] = useState([])
     
 
     useEffect(() => {
@@ -10,19 +10,19 @@ import { Link } from "react-router-dom"
       .then(response =>  response.json())
       .then((content) => {
       console.log(content)
-      setThread(content) 
+      setThreads(content) 
       })
     }, [])
 
 
-    if (!thread) {
+    if (!threads) {
         return <></>;
       }
 
-     const ThreadLists = thread.map((thread, index) => {
+     const ThreadLists = threads.map((thread) => {
        return ( 
        <li key={thread.id}>
-          <Link to ={`/thread/${index}`}>{thread.title}</Link></li>     
+          <Link to ={`/thread/${thread.id}`}>{thread.title}</Link></li>     
         
       )     
      })

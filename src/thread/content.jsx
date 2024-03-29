@@ -14,7 +14,7 @@ export function ThreadContents() {
     setContent(thread.posts) 
     console.log(thread.posts)
     })
-  }, [threadId])
+  }, [comments])
 
     if (!comments) {
       return <></>;
@@ -23,7 +23,7 @@ export function ThreadContents() {
     const ContentLists = comments.map((comment) => {
       return ( 
       <li key={comment.id}>
-         {comment.posts}</li>     
+         {comment.post}</li>     
      )     
     })
 

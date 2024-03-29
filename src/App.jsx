@@ -2,7 +2,7 @@ import './App.css';
 import {ThreadLists} from "./threadLists"
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { NewThread } from "./thread/new"
-import { ThreadContents} from "./thread/content"
+import ThreadContents from './thread/content';
 
 
 export function App() {
